@@ -65,9 +65,25 @@ TempWorkDays
 
 
 
-
+## This is not exclusion!
 TempWorkDays2 <- data.frame(
   xminFahr = xmin[seq(length(xmin)-2)]*9/5 + 32,
   xmaxFahr = xmax[seq(length(xmax)-2)]*9/5 + 32
 )
 TempWorkDays2
+
+
+## Easier way:
+
+temperatures <- within(temperatures, {
+  xminFahrenheit <- xmin * (9/5) + 32
+  xmaxFahrenheit <- xmax * (9/5) + 32
+})
+
+temperaturesFahrenheit <- temeratures[, c('xminFahrenheit', 'xmaxFahrenheit)]
+
+## Easier to subset the whole data.frame instead of 
+## doing this for each vector used in its construction
+
+temperaturesFahrenheit[1:5, ]
+temperaturesFahrenheit[-(6:7), ]
